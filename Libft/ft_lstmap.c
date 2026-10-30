@@ -16,20 +16,24 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	if (!lst)
 		return (NULL);
-	struct s_list	*new_head;
-	struct s_list	*current_original;
-	struct s_list	*current_new;
+	t_list	*head;
+	t_list	*node;
+	t_list	*content;
 	
-	new_head = ft_lstnew(lst->content);
-	current_original = lst->next;
-	current_new = new_head;
+	head = NULL;
 
-	while (current_original)
+	while (lst)
 	{
-		current_new->next = ft_lstnew(current_original->content);
-		current_new->content = f(current_new->content);
-		current_new = current_new->next;
-		current_original = current_original->next;
+		content = f(lst->content);
+		node = ft_lstnew(content);
+		if (!node)
+		{
+			del(content);
+			ft_lstclear(&head, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&head, node);
+		lst = lst->next;
 	}
-	return (new_head);
+	return (head);
 }

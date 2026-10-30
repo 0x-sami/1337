@@ -12,101 +12,72 @@
 
 #include "libft.h"
 
-char	**fill(char **result, char const *s, char c, int segments);
-int	nsegments(char const *s, char c);
-int	handle_mem(char **result, char const *s, char c);
+#include "libft.h"
+
+static int	count_words(char const *s, char c)
+{
+	int	count;
+	int	in_word;
+
+	count = 0;
+	in_word = 0;
+	while (*s)
+	{
+		if (*s != c && !in_word)
+		{
+			in_word = 1;
+			count++;
+		}
+		else if (*s == c)
+			in_word = 0;
+		s++;
+	}
+	return (count);
+}
+
+static void	free_all(char **r, int n)
+{
+	while (n > 0)
+		free(r[--n]);
+	free(r);
+}
+
+static char	**fill(char **r, char const *s, char c)
+{
+	int		i;
+	size_t	len;
+
+	i = 0;
+	while (*s)
+	{
+		if (*s == c)
+			s++;
+		else
+		{
+			len = 0;
+			while (s[len] && s[len] != c)
+				len++;
+			r[i] = ft_substr(s, 0, len);
+			if (!r[i])
+				return (free_all(r, i), NULL);
+			i++;
+			s += len;
+		}
+	}
+	r[i] = NULL;
+	return (r);
+}
 
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
-	int		segments;
 
-	// Handling memory allocation
-	// Allocating the entire split
-	segments = nsegments(s, c) + 1;
-	result = malloc(segments * sizeof(char *));
+	if (!s)
+		return (NULL);
+	result = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	// Allocating individual elements in the split
-	if (!handle_mem(result, s, c))
-		return (NULL);
-	// Fill result and return
-	result = fill(result, s, c, segments);
-	result[segments] = NULL;
-	return (result);
-}
-
-char	**fill(char **result, char const *s, char c, int segments)
-{
-	int	i;
-	int	j;
-	int	fill_index;
-
-	i = 0;
-	j = 0;
-	fill_index = 0;
-	while (s[i + 1])
-	{
-		if (s[i] == c && s[i + 1] == c)
-			i++;
-		else if ((s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
-			|| s[i--] != c && s[i + 1] != c)
-		{
-			while (s[++i] != c)
-				j++;
-			result[fill_index] = ft_substr(s, i - j, j);
-			fill_index++;
-			j = 0;
-		}
-	}
-	return (result);
-}
-
-int	nsegments(char const *s, char c)
-{
-	int	i;
-	int	segments;
-
-	i = 0;
-	segments = 0;
-	while (s[i])
-	{
-		if (s[i] == c && s[i + 1] == c)
-			i++;
-		else if (s[i] == c && (s[i + 1] != c || s[i + 1] != '\0'))
-		{
-			i++;
-			segments++;
-		}
-		i++;
-	}
-	return (segments + 1);
-}
-
-int	handle_mem(char **result, char const *s, char c)
-{
-	int	segments;
-	int	i;
-
-	i = 0;
-	segments = nsegments(s, c);
-	while (segments > 0)
-	{
-		result[i] = malloc(ft_strlen(s) * sizeof(char));
-		if (!result[i])
-		{
-			while (i >= 0)
-			{
-				free(result[i]);
-				i--;
-			}
-			free(result);
-			return (0);
-		}
-		i++;
-		segments--;
-	}
-	return (1);
+	return (fill(result, s, c));
 }
 /*
 #include <stdio.h>
