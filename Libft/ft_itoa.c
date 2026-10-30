@@ -6,80 +6,78 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/20 16:15:56 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/26 22:02:48 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/29 12:21:55 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*handle_negative(int n);
-char	*handle_positive(int n);
-int	handle_negative_indexing(int i, int n);
+int	n_len(int n);
+void	strrev(char *res);
 
 char	*ft_itoa(int n)
 {
-	if (n > 0)
-		return (handle_positive(n));
-	return (handle_negative(n));
-}
-
-char	*handle_negative(int n)
-{
-	int		i;
 	char	*res;
+	int		i;
 
-	i = 0;
+	if (n == 0)
+		return (ft_strdup("0"));
 	if (n == -2147483648)
-		return ("-2147483648");
-	i = handle_negative_indexing(i, n);
-	res = malloc((i + 1) * sizeof(char));
-	ft_memset(res, '0', i);
-	n *= -1;
-	while (i > 0)
-	{
-		res[i - 1] = n % 10 + '0';
-		n = n / 10;
-		i--;
-	}
-	res[0] = '-';
-	return (res);
-}
-
-int	handle_negative_indexing(int i, int n)
-{
-	i = 0;
-	n *= -1;
-	while (n > 0)
-	{
-		n /= 10;
-		i++;
-	}
-	i++;
-	return (i);
-}
-
-char	*handle_positive(int n)
-{
-	int		i;
-	int		n_n;
-	char	*res;
-
-	i = 0;
-	n_n = n;
-	while (n_n > 0)
-	{
-		n_n /= 10;
-		i++;
-	}
-	res = malloc(i * sizeof(char));
+		return (ft_strdup("-2147483648"));
+	res = malloc(n_len(n) + 1);
 	if (!res)
 		return (NULL);
-	ft_memset(res, '0', i);
-	while (i > 0)
+	i = 0;
+	if (n < 0)
 	{
-		res[i - 1] = n % 10 + '0';
-		n = n / 10;
-		i--;
+		res[0] = '-';
+		i++;
+		n = -n;
 	}
+	while (n)
+	{
+		res[i++] = (n % 10) + '0';
+		n = n / 10;
+	}
+	res[i] = '\0';
+	strrev(res);
 	return (res);
+}
+
+void	strrev(char *res)
+{
+	char	tmp;
+	int		start;
+	int		end;
+
+	start = 0;
+	end = ft_strlen(res) - 1;
+	if (res[start] == '-')
+		start++;
+	while(res[start] && start < end)
+	{
+		tmp = res[start];
+		res[start] = res[end];
+		res[end] = tmp;
+		start++;
+		end--;
+	}
+}
+
+int	n_len(int n)
+{
+	int	i;
+
+	i = 0;
+	if (n < 0)
+	{
+		n = -n;
+		i++;
+	}
+	while (n)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }

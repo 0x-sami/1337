@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:37:17 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/24 09:28:17 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:27:56 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 
 	i = 0;
 	while (s[i])
+	{
 		f(i, &s[i]);
+		i++;
+	}
 }

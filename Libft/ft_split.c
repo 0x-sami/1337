@@ -5,65 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/28 15:59:04 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/28 20:44:18 by ysalama          ###   ########.fr       */
+/*   Created: 2026/10/30 14:17:28 by ysalama           #+#    #+#             */
+/*   Updated: 2026/10/30 17:37:47 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	*free_all(char **result, int count);
-static char	**fill(char **result, char const *s, char c, int segments);
-static int	nsegments(char const *s, char c);
+char	**fill(char **result, char const *s, char c, int segments);
+int	nsegments(char const *s, char c);
+int	handle_mem(char **result, char const *s, char c);
 
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	int		segments;
 
-	if (!s)
-		return (NULL);
-	segments = nsegments(s, c);
-	result = malloc((segments + 1) * sizeof(char *));
+	// Handling memory allocation
+	// Allocating the entire split
+	segments = nsegments(s, c) + 1;
+	result = malloc(segments * sizeof(char *));
 	if (!result)
 		return (NULL);
-	return (fill(result, s, c, segments));
-}
-
-static void	*free_all(char **result, int count)
-{
-	while (count > 0)
-		free(result[--count]);
-	free(result);
-	return (NULL);
-}
-
-static char	**fill(char **result, char const *s, char c, int segments)
-{
-	int		i;
-	size_t	len;
-
-	i = 0;
-	while (i < segments)
-	{
-		while (*s == c)
-			s++;
-		len = 0;
-		while (s[len] && s[len] != c)
-			len++;
-		result[i] = malloc(len + 1);
-		if (!result[i])
-			return (free_all(result, i));
-		ft_memcpy(result[i], s, len);
-		result[i][len] = '\0';
-		s += len;
-		i++;
-	}
-	result[i] = NULL;
+	// Allocating individual elements in the split
+	if (!handle_mem(result, s, c))
+		return (NULL);
+	// Fill result and return
+	result = fill(result, s, c, segments);
+	result[segments] = NULL;
 	return (result);
 }
 
-static int	nsegments(char const *s, char c)
+char	**fill(char **result, char const *s, char c, int segments)
+{
+	int	i;
+	int	j;
+	int	fill_index;
+
+	i = 0;
+	j = 0;
+	fill_index = 0;
+	while (s[i + 1])
+	{
+		if (s[i] == c && s[i + 1] == c)
+			i++;
+		else if ((s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
+			|| s[i--] != c && s[i + 1] != c)
+		{
+			while (s[++i] != c)
+				j++;
+			result[fill_index] = ft_substr(s, i - j, j);
+			fill_index++;
+			j = 0;
+		}
+	}
+	return (result);
+}
+
+int	nsegments(char const *s, char c)
 {
 	int	i;
 	int	segments;
@@ -74,12 +73,50 @@ static int	nsegments(char const *s, char c)
 	{
 		if (s[i] == c && s[i + 1] == c)
 			i++;
-		else if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
+		else if (s[i] == c && (s[i + 1] != c || s[i + 1] != '\0'))
 		{
 			i++;
 			segments++;
 		}
 		i++;
 	}
-	return (segments);
+	return (segments + 1);
 }
+
+int	handle_mem(char **result, char const *s, char c)
+{
+	int	segments;
+	int	i;
+
+	i = 0;
+	segments = nsegments(s, c);
+	while (segments > 0)
+	{
+		result[i] = malloc(ft_strlen(s) * sizeof(char));
+		if (!result[i])
+		{
+			while (i >= 0)
+			{
+				free(result[i]);
+				i--;
+			}
+			free(result);
+			return (0);
+		}
+		i++;
+		segments--;
+	}
+	return (1);
+}
+/*
+#include <stdio.h>
+
+int main()
+{
+	char const *s = "tripouille";
+	char c = ' ';
+	printf("%d$\n", nsegments(s, c));
+	//printf("%s$\n", ft_split(s, c)[1]);
+	//printf("%s$\n", ft_split(s, c)[2]);
+}
+*/

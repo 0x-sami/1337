@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 19:58:28 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/24 09:27:49 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:22:08 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	write(fd, &s, ft_strlen(s));
+	write(fd, s, ft_strlen(s));
 }

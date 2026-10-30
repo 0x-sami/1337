@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:00:04 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/24 11:54:16 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/29 14:26:02 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	char	nul;
-	nul = '\0';
-	write(fd, &s, ft_strlen(s));
-	write(fd, &nul, 1);
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }
