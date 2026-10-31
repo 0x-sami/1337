@@ -6,15 +6,11 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:33:01 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/24 11:36:43 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/31 14:56:09 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//
-// Issues:
-//
-// 1. Something relating to negative numbers and how 256 should be added.
-//
+#include "libft.h"
 
 int	ft_toupper(int c)
 {

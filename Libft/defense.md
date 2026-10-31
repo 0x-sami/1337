@@ -1,3 +1,5 @@
+when passing null null to memmove, it segfaults, but passing null null to ft_memmove returns null, this needs defense.
+
 # Libft defense questions
 
 This project builds a static library, `libft.a`, from the explicitly listed

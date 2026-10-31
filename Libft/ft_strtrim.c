@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 15:14:43 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/28 11:14:15 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/31 17:55:56 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
+	size_t	i;
 	int		j;
 	char	*empty;
 
@@ -34,11 +34,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		j--;
 	return (ft_substr(s1, i, j - i));
 }
-/*
-#include <stdio.h>
-int main()
-{
-	printf("%s$\n", ft_strtrim("tripouille   xxx", " x"));
-	printf("%d\n", ft_strncmp(ft_strtrim("tripouille   xxx", " x"), "tripouille", 20));
-}
-*/

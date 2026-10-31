@@ -1,6 +1,7 @@
 NAME=libft.a
 
 AR=ar -rsc
+FLAGS=-Wall -Werror -Wextra
 
 SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
@@ -19,8 +20,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	
-%.o: %.c
-	cc -c $< -o $@
+%.o: %.c libft.h
+	cc $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

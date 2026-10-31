@@ -6,15 +6,9 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 11:35:45 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/21 19:46:39 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/31 14:52:20 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//
-// Issues:
-//
-// 1. Use raw pointers instead.
-//
 
 #include "libft.h"
 

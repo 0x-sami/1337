@@ -12,7 +12,21 @@
 
 #include "libft.h"
 
-#include "libft.h"
+static int	count_words(char const *s, char c);
+static void	free_all(char **r, int n);
+static char	**fill(char **r, char const *s, char c);
+
+char	**ft_split(char const *s, char c)
+{
+	char	**result;
+
+	if (!s)
+		return (NULL);
+	result = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	return (fill(result, s, c));
+}
 
 static int	count_words(char const *s, char c)
 {
@@ -67,27 +81,3 @@ static char	**fill(char **r, char const *s, char c)
 	r[i] = NULL;
 	return (r);
 }
-
-char	**ft_split(char const *s, char c)
-{
-	char	**result;
-
-	if (!s)
-		return (NULL);
-	result = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!result)
-		return (NULL);
-	return (fill(result, s, c));
-}
-/*
-#include <stdio.h>
-
-int main()
-{
-	char const *s = "tripouille";
-	char c = ' ';
-	printf("%d$\n", nsegments(s, c));
-	//printf("%s$\n", ft_split(s, c)[1]);
-	//printf("%s$\n", ft_split(s, c)[2]);
-}
-*/

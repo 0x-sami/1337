@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 01:54:08 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/27 03:34:31 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/31 14:47:54 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (!lst)
-		return (NULL);
 	t_list	*head;
 	t_list	*node;
 	t_list	*content;
-	
-	head = NULL;
 
+	if (!lst)
+		return (NULL);
+	head = NULL;
 	while (lst)
 	{
 		content = f(lst->content);

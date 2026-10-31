@@ -6,14 +6,14 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/20 16:15:56 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/29 12:21:55 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/10/31 14:44:37 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	n_len(int n);
-void	strrev(char *res);
+static int	n_len(int n);
+static void	strrev(char *res);
 
 char	*ft_itoa(int n)
 {
@@ -44,7 +44,7 @@ char	*ft_itoa(int n)
 	return (res);
 }
 
-void	strrev(char *res)
+static void	strrev(char *res)
 {
 	char	tmp;
 	int		start;
@@ -54,7 +54,7 @@ void	strrev(char *res)
 	end = ft_strlen(res) - 1;
 	if (res[start] == '-')
 		start++;
-	while(res[start] && start < end)
+	while (res[start] && start < end)
 	{
 		tmp = res[start];
 		res[start] = res[end];
@@ -64,7 +64,7 @@ void	strrev(char *res)
 	}
 }
 
-int	n_len(int n)
+static int	n_len(int n)
 {
 	int	i;
 
