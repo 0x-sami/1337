@@ -1,28 +1,27 @@
 # Libft defense questions
 
-This project builds a static library, `libft.a`, from every `*.c` file in the directory. The functions are grouped into character tests, memory/string helpers, allocation/string transformations, output helpers, and linked-list helpers.
+This project builds a static library, `libft.a`, from the explicitly listed
+source files in the Makefile. The functions are grouped into character tests,
+memory/string helpers, allocation/string transformations, output helpers, and
+linked-list helpers.
 
 ## Build system
 
 ### Makefile
 
 - What does `NAME=libft.a` mean, and why is the output a static library?
-- How does `SRCS=$(wildcard *.c)` choose the source files? What are the
-  advantages and disadvantages of relying on `wildcard`?
 - How is `OBJS=$(SRCS:.c=.o)` derived?
-- What command compiles a `.c` file into a `.o` file? Where does that rule
-  come from if no explicit compilation rule is written?
-- What does `ar -rsc` do?
-- Why does `all` depend on `clean` after building the library?
-- Why is only `clean` marked `.PHONY`? Should `all` and other targets also be
-  phony?
-- What happens if a new C file is added and `make` is run?
+- How does the `%.o: %.c` pattern rule compile each C file into an object file?
+- Why is `cc` used directly in the pattern rule instead of a `CC` variable?
+- What does `$(AR)` expand to, and what do the `-r`, `-s`, and `-c` options do?
+- Why does `all` depend only on `$(NAME)` rather than running `clean`
+  automatically after a successful build?
+- What happens if a new C file is added but is not added to `SRCS`?
+- What does each target do: `make`, `make clean`, `make fclean`, and `make re`?
 - What happens when a header changes? Does this Makefile know that object
   files must be rebuilt?
-- Why is `rm -rf` used for object files, and what would be a safer or more
-  conventional command?
-- What is the difference between `make`, `make clean`, and `make re`? Is a
-  `re` target currently provided?
+- Why is `rm -f` used for object files and the library?
+- Why are `all`, `clean`, `fclean`, and `re` marked `.PHONY`?
 
 ## Character classification and conversion
 

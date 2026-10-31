@@ -20,7 +20,7 @@ $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	
 %.o: %.c
-	cc`-c $< -o $@
+	cc -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
