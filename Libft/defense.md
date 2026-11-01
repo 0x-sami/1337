@@ -92,12 +92,12 @@ No, it works on any memry block.
 
 ### ft_memcpy.c
 
-- What does `ft_memcpy` guarantee about overlapping source and destination
-  buffers?
-- Why is `ft_memmove` required for overlap?
-- Why is the loop index an `int` even though `n` is `size_t`?
-- What happens when `n` is zero?
-- What assumptions are made about `dest` and `src` when `n` is nonzero?
+####- What does `ft_memcpy` guarantee about overlapping source and destination buffers?
+Overlapping memory regions is undefined in memcpy, use memmove instead to support overlap.
+####- What happens when `n` is zero?
+Nothing happens and dest is returned unchnaged.
+####- What assumptions are made about `dest` and `src` when `n` is nonzero?
+The assumption is that dest and src are valid C strings.
 
 ### ft_memmove.c
 
