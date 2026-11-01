@@ -1,4 +1,5 @@
-when passing null null to memmove, it segfaults, but passing null null to ft_memmove returns null, this needs defense.
+####- When passing null null to memmove, it segfaults, but passing null null to ft_memmove returns null, this needs defense.
+When either dest or src are null, or len == 0, the the behaviour is undefined, so it's not my responsibility to care.
 
 # Libft defense questions
 
@@ -11,91 +12,83 @@ linked-list helpers.
 
 ### Makefile
 
-- What does `NAME=libft.a` mean, and why is the output a static library?
-- How is `OBJS=$(SRCS:.c=.o)` derived?
-- How does the `%.o: %.c` pattern rule compile each C file into an object file?
-- Why is `cc` used directly in the pattern rule instead of a `CC` variable?
-- What does `$(AR)` expand to, and what do the `-r`, `-s`, and `-c` options do?
-- Why does `all` depend only on `$(NAME)` rather than running `clean`
-  automatically after a successful build?
-- What happens if a new C file is added but is not added to `SRCS`?
-- What does each target do: `make`, `make clean`, `make fclean`, and `make re`?
-- What happens when a header changes? Does this Makefile know that object
-  files must be rebuilt?
-- Why is `rm -f` used for object files and the library?
-- Why are `all`, `clean`, `fclean`, and `re` marked `.PHONY`?
+####- What does `NAME=libft.a` mean, and why is the output a static library?
+First part is the output name, and the second part is: the output is a static library because Libft is intended to be reusable, so that other programs don't need to copy the source file to use the library.
+####- How is `OBJS=$(SRCS:.c=.o)` derived?
+Substitution-reference syntax, it means take every .c file from SRCS and replace its extension with .o.
+####- How does the `%.o: %.c` pattern rule compile each C file into an object file?
+Using the % wildcard, Make matches .o files against %.o, extracts the file name without extension as %, looks for the .c as its prerequisite, and executes the recipe.
+####- What do the `-r`, `-s`, and `-c` options do?
+r inserts the files into the archive, without it the command will not work.
+s adds an index, removing it in our system is fine, but not MacOS.
+c prevents ar from warning that it's creating a new archive.
+####- What happens if a new C file is added but is not added to `SRCS`?
+Nothing will happen and it won't be included in libft.a
+####- What does each target do: `make`, `make clean`, `make fclean`, and `make re`?
+`make` looks for the target, all. Checks whether libft.a needs to be built or updated, builds any missing or outdated .o files, creates or updates libft.a.
+`make clean` deletes all the object files and leaving the archive.
+`make fclean` runs `clean` and deletes the archive too.
+`make re` runs `fclean` to delete everything and `all` to create a new archive.
+####- What happens when a header changes? Does this Makefile know that object files must be rebuilt?
+Make checks for timestamsp.
+####- Why are `all`, `clean`, `fclean`, and `re` marked `.PHONY`?
+`all`, `fclean`, and `re` can be removed but are kept in `.PHONY` so evaluators don't start bitching about them. They're in `.PHONY` so that if a file with the same name is created it won't be run instead.
 
 ## Character classification and conversion
 
 ### ft_isalpha.c
 
-- How does `ft_isalpha` distinguish uppercase and lowercase ASCII letters?
-- What does it return for negative values, extended characters, and digits?
-- Why does it return an `int` instead of a `char` or `bool`?
+####- What does it return for negative values, extended characters, and digits?
+It returns 0 for anything other tha a-z or A-Z
+####- Why does it return an `int` instead of a `char` or `bool`?
+Bools didn't exist back then, and it should also support all unsigned char values and EOF.
 
 ### ft_isdigit.c
 
-- Which exact ASCII range is accepted by `ft_isdigit`?
-- Why is this function independent of locale?
-- Does it accept signs, whitespace, or numeric characters outside ASCII?
+####- Why is this function independent of locale?
+0-9 have the same ASCII values regardless of the system's locale.
 
 ### ft_isalnum.c
 
-- How does `ft_isalnum` combine the alphabetic and digit checks?
-- Does it accept only ASCII letters and digits?
-- Could it reuse `ft_isalpha` and `ft_isdigit` instead of repeating ranges?
-
 ### ft_isascii.c
 
-- What range does `ft_isascii` accept?
-- Why is 127 included?
-- What happens for values below zero or above 127?
+####- Why is 127 included?
+It's part of the ASCII table.
+####- What happens for values below zero or above 127?
+0 is returned.
 
 ### ft_isprint.c
 
-- What is the difference between a printable character and an ASCII
-  character?
-- Why is the accepted range 32 through 126?
-- Are control characters such as newline and tab printable?
+####- Why are non-printable characters not printable?
+Non printable characters are control characters, they erform actions rather than represent symbols.
+####- Are control characters such as newline and tab printable?
+No, they don't have a sisible character representation.
 
 ### ft_tolower.c
 
-- When does `ft_tolower` change its input?
-- What does it return for uppercase ASCII, lowercase ASCII, digits, and
-  non-ASCII values?
-- Why does it return an `int`?
+####- What does it return for uppercase ASCII, lowercase ASCII, digits, and non-ASCII values?
+Unchanged.
 
 ### ft_toupper.c
-
-- When does `ft_toupper` change its input?
-- What happens to already-uppercase, numeric, and non-ASCII values?
-- How would you make the implementation locale-aware, and why is that
-  outside this project?
 
 ## Memory and libc-style functions
 
 ### ft_strlen.c
 
-- How does the loop find the end of a C string?
-- What is the time complexity?
-- What happens if `s` is `NULL`?
-- Why is the index an `int` while the return type is `size_t`?
+####- What is the time complexity?
+O(n) linear time.
+####- What happens if `s` is `NULL`?
+Not my responsibility lol.
 
 ### ft_memset.c
 
-- Why is the value converted to `unsigned char` before writing?
-- Does `ft_memset` require the destination to be a string?
-- What does it return?
-- What happens when `n` is zero?
+####- Why is the value converted to `unsigned char` before writing?
+Because memset operates on bytes, not characters pr integers.
+Unsigned char is used instead of signed because unsigned is between 0-255 and allows easier comparison.
+####- Does `ft_memset` require the destination to be a string?
+No, it works on any memry block.
 
 ### ft_bzero.c
-
-- How is `ft_bzero` implemented using `ft_memset`?
-- Why should the length parameter normally be `size_t`?
-- What is the consequence of this implementation declaring `n` as
-  `unsigned char`? Which lengths are truncated?
-- Is the header prototype consistent with the implementation and the usual
-  libft specification?
 
 ### ft_memcpy.c
 
