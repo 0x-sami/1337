@@ -6,13 +6,13 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 11:50:09 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/15 13:09:20 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/06 12:03:34 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, unsigned char n)
+void	ft_bzero(void *s, size_t n)
 {
 	ft_memset(s, 0, n);
 }

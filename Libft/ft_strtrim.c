@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 15:14:43 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/02 14:03:06 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/06 12:04:41 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = ft_strlen(s1);
 	while (ft_strchr(set, s1[i]))
 		i++;
-	if (i == ft_strlen(s1) + 1 || ft_strlen(s1) == 0)
+	if (i >= ft_strlen(s1))
 		return (ft_strdup(""));
 	while (ft_strchr(set, s1[j - 1]))
 		j--;

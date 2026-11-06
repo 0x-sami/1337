@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 14:41:03 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/29 13:58:41 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/06 12:14:54 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*joined;
-	int		s1_len;
-	int		s2_len;
+	size_t	s1_len;
+	size_t	s2_len;
 	int		i;
 
 	if (!s1 || !s2)
