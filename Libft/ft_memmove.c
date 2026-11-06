@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:13:30 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/31 17:55:41 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/06 10:36:49 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,15 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	p_d = (char *)dest;
 	p_s = (const char *)src;
-	if (p_d < p_s)
+	if (src > dest)
 	{
 		while (n--)
 			*p_d++ = *p_s++;
 	}
-	else if (p_d > p_s)
+	else if (src < dest)
 	{
-		p_d += n;
-		p_s += n;
 		while (n--)
-			*(--p_d) = *(--p_s);
+			p_d[n] = p_s[n];
 	}
 	return (dest);
 }

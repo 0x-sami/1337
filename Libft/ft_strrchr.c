@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 12:01:30 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/26 23:28:19 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/02 13:49:56 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char	*ft_strrchr(const char *s, int c)
 		i++;
 		str_len--;
 	}
-	return (0);
+	return (NULL);
 }

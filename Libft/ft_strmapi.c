@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 18:11:42 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/31 14:48:48 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/04 17:30:18 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	unsigned int	i;
 	char			*res;
 
+	if (!s || !f)
+		return (NULL);
 	res = malloc(ft_strlen(s) * sizeof(char) + 1);
 	if (!res)
 		return (NULL);

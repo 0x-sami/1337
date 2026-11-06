@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 12:43:31 by ysalama           #+#    #+#             */
-/*   Updated: 2026/10/27 17:49:17 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/02 15:17:17 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strdup(const char *s)
 {
 	char	*ptr;
 
+	if (!s)
+		return (NULL);
 	ptr = malloc(ft_strlen(s) * sizeof(char) + 1);
 	if (!ptr)
 		return (NULL);
