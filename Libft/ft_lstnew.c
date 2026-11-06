@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/25 11:31:01 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/06 10:33:23 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/06 11:38:04 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstnew(void *content)
 	struct s_list	*new;
 
 	if (!content)
-		return (NULL)
+		return (NULL);
 	new = malloc(sizeof(struct s_list));
 	if (!new)
 		return (NULL);
