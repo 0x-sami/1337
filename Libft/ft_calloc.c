@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/17 12:01:11 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/03 17:44:04 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/09 14:13:47 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*ptr;
 
 	if (size != 0 && nmemb > (size_t)(-1) / size)
-		return (NULL);
+		return (ft_strdup(""));
 	total_size = nmemb * size;
 	ptr = malloc(total_size);
 	if (!ptr)
