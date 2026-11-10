@@ -27,12 +27,60 @@ int	ft_putstr(char *s)
 	return (s_len);
 }
 
-int	ft_putptr(void *ptr)
+int ft_putnbr(long n, char flag)
 {
-	
+	int count;
+
+	count = 0;
+    if (flag == 'd' || flag == 'i')
+    {
+	    if (n < 0)
+	    {
+	    	count += ft_putchar('-');
+	    	n = -n;
+	    }
+	    if (n / 10)
+		    count += ft_putnbr(n / 10, flag);
+	    count += ft_putchar(n % 10 + '0');
+    }
+    else if (flag == 'u')
+    {
+        if (n / 10)
+			count += ft_putnbr(n / 10, flag);
+        count += ft_putchar(n % 10 + '0');
+    }
+    return (count);
 }
 
-int	ft_putnbr()
+int ft_puthex(long n, char flag)
+{
+	char *lower;
+	char *upper;
+	int count;
+
+	lower = "0123456789abcdef";
+	upper = "0123456789ABCDEF";
+	count = 0;
+	if (flag == 'x')
+	{
+		if (n / 10)
+			count += ft_puthex(n / 10, flag);
+		count += ft_putchar(lower[n % 16]);
+	}
+	else if (flag == 'X')
+	{
+		if (n / 10)
+			count += ft_puthex(n / 10, flag);
+		count += ft_putchar(upper[n % 16]);
+	}
+	else if (flag == 'p')
+	{
+		count += ft_putstr("0x");
+	}
+	return (count);
+}
+
+int	ft_putptr(void *ptr)
 {
 	
 }

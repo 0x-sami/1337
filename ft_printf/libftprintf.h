@@ -17,6 +17,15 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
+// ft_printf.c
 int	ft_printf(const char *, ...);
+
+// print_utils.c
+int	ft_putchar(char c);
+int	ft_putstr(char *s);
+int ft_putnbr(long n, char flag);
+
+// other_utils.c
+int	ft_strlen(const char *s);
 
 #endif
