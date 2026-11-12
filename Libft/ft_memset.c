@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 11:35:45 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/01 09:45:54 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/12 22:00:53 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	int		i;
+	size_t	i;
 	char	*str;
 
 	i = 0;
