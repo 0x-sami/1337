@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 11:17:29 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/02 13:46:29 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/12 21:08:29 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 		return (&str[ft_strlen(str)]);
 	while (str[i])
 	{
-		if (str[i] == (unsigned char)c)
+		if (str[i] == (char)c)
 			return (&str[i]);
 		i++;
 	}
