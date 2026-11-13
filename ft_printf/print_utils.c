@@ -6,11 +6,11 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 10:50:54 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/11 20:19:23 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/13 11:15:04 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putchar(char c)
 {
@@ -18,6 +18,7 @@ int	ft_putchar(char c)
 	return (1);
 }
 
+// Bruh why does s_len exist?
 int	ft_putstr(char *s)
 {
 	int	s_len;
@@ -54,7 +55,7 @@ int	ft_putnbr(long n, char flag)
 
 // TODO: remove the hex variables
 
-int	ft_puthex(unsigned long long n, char flag)
+int	ft_puthex(unsigned long n, char flag)
 {
 	char	*lower_hex;
 	char	*upper_hex;
@@ -80,7 +81,6 @@ int	ft_puthex(unsigned long long n, char flag)
 
 int	ft_putptr(void *ptr)
 {
-	char		*hex;
 	uintptr_t	address;
 	int			count;
 
@@ -89,20 +89,9 @@ int	ft_putptr(void *ptr)
 		write(1, "(nil)", 5);
 		return (5);
 	}
-	hex = "0123456789abcdef";
 	address = (uintptr_t)ptr;
 	count += write(1, "0x", 2);
-	if (address >= 16)
-		count += ft_puthex(address / 16, 'x');
-	count += write(1, &hex[address % 16], 1);
+	count += ft_putptr_rec(address);
 	return (count);
-}
-#include <stdio.h>
-int main()
-{
-	int n = 1;
-	ft_putptr((void *)&n);
-	//ft_putptr(NULL);
-	printf("\n%p\n", (void *)&n);
-	//printf("\n%p\n", NULL);
+
 }
