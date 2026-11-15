@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_utils_hex.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/15 10:00:28 by ysalama           #+#    #+#             */
+/*   Updated: 2026/11/15 11:46:50 by ysalama          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-static int ft_putptr_rec(uintptr_t address);
+static int	ft_putptr_rec(uintptr_t address);
 
 int	ft_puthex(unsigned long n, char flag)
 {
@@ -36,18 +48,17 @@ int	ft_putptr(void *ptr)
 		write(1, "(nil)", 5);
 		return (5);
 	}
-    count = 0;
+	count = 0;
 	address = (uintptr_t)ptr;
 	count += write(1, "0x", 2);
 	count += ft_putptr_rec(address);
 	return (count);
-
 }
 
-static int ft_putptr_rec(uintptr_t address)
+static int	ft_putptr_rec(uintptr_t address)
 {
-	char *hex;
-	int	count;
+	char	*hex;
+	int		count;
 
 	hex = "0123456789abcdef";
 	count = 0;

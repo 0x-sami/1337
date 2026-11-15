@@ -6,13 +6,13 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:46:02 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/13 20:33:12 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/15 11:47:37 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_handler(char c, va_list args);
+static int	ft_print_handler(char c, va_list args);
 
 int	ft_printf(const char *format, ...)
 {
@@ -25,6 +25,8 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	while (format[i])
 	{
+		if (count == -1)
+			return (-1);
 		if (format[i] == '%')
 		{
 			i++;
@@ -38,12 +40,14 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-int	ft_print_handler(char c, va_list args)
+static int	ft_print_handler(char c, va_list args)
 {
 	int	count;
 
 	count = 0;
-	if (c == 'c')
+	if (c == 0)
+		return (-1);
+	else if (c == 'c')
 		count += ft_putchar(va_arg(args, int));
 	else if (c == 's')
 		count += ft_putstr(va_arg(args, char *));
@@ -60,9 +64,18 @@ int	ft_print_handler(char c, va_list args)
 	return (count);
 }
 
+/*
 #include <stdio.h>
 int main()
 {
-	int i = ft_printf("%", 1);
-	printf("\n---%d\n", i);
+	int i = 0;
+	ft_printf("ft_printf: ");
+	i = ft_printf("%p", NULL);
+	ft_printf("\nNumber of chars printed: %d\n", i);
+	printf("\n");
+	int j = 0;
+	printf("   printf: ");
+	j = printf("%p", NULL);
+	printf("\nNumber of chars printed: %d\n", i);
 }
+*/
