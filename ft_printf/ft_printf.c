@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:46:02 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/17 11:17:09 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/17 11:55:38 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,23 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		count;
 	int		i;
+	int		err_check;
 
 	va_start(args, format);
 	count = 0;
 	i = 0;
 	while (format[i])
 	{
-		if (count == -1)
-			return (-1);
 		if (format[i] == '%')
 		{
 			i++;
-			count += ft_print_handler(format[i], args);
+			if ((err_check = ft_print_handler(format[i], args)) == -1)
+			{
+				count = -1;
+				break ;
+			}
+			else
+				count += err_check;
 		}
 		else
 			count += write(1, &format[i], 1);
@@ -64,6 +69,7 @@ static int	ft_print_handler(char c, va_list args)
 	return (count);
 }
 
+/*
 #include <stdio.h>
 #include <sys/syscall.h>
 static int i = 0;
@@ -77,20 +83,23 @@ ssize_t write(int v, const void  *buf, size_t o)
 	else
 		return -1;
 }
+int main()
+{
+	dprintf(2,"%d",ft_printf("%d",12345));
+}
+*/
 /*
+#include <stdio.h>
 int main()
 {
 	int i = 0;
 	ft_printf("ft_printf: ");
-	i = ft_printf("%\n");
+	i = ft_printf("%d, %c, %s, %p", 17, 'a', "Hello", &i);
 	ft_printf("\nNumber of chars printed: %d\n", i);
 	printf("\n");
 	int j = 0;
-	printf("   printf: ");
-	j = printf("%\n");
+	printf("---printf: ");
+	j = printf("%d, %c, %s, %p", 17, 'a', "Hello", &i);
 	printf("\nNumber of chars printed: %d\n", j);
-}*/
-int main ()
-{
-	dprintf(2,"%d",ft_printf("%d",12345));
 }
+*/

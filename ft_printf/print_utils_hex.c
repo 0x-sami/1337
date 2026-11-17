@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/15 10:00:28 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/17 11:18:01 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/17 11:43:20 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ int	ft_putptr(void *ptr)
 {
 	uintptr_t	address;
 	int			count;
+	int			err_check;
 
 	if (!ptr)
 	{
-		write(1, "(nil)", 5);
-		return (5);
+		if ((err_check = write(1, "(nil)", 5) == -1);
+				return (-1);
+		else
+			return (5);
 	}
 	count = 0;
 	address = (uintptr_t)ptr;
