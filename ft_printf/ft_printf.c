@@ -6,20 +6,20 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:46:02 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/17 11:55:38 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/17 15:20:25 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 static int	ft_print_handler(char c, va_list args);
+static int	errwrite(char c, va_list args, int flag);
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		count;
 	int		i;
-	int		err_check;
 
 	va_start(args, format);
 	count = 0;
@@ -29,23 +29,37 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			if ((err_check = ft_print_handler(format[i], args)) == -1)
-			{
-				count = -1;
+			count = errwrite(format[i], args, 0);
+			if (count == -1)
 				break ;
-			}
-			else
-				count += err_check;
 		}
 		else
-			count += write(1, &format[i], 1);
+			errwrite(format[i], NULL, 1);
 		i++;
 	}
 	va_end(args);
 	return (count);
 }
 
-static int	ft_print_handler(char c, va_list args)
+static int	errwrite(char c, va_list args, int flag)
+{
+	int	count;
+	int	err_check;
+
+	count = 0;
+	if (!flag)
+	{
+		if ((err_check = ft_print_handler(c, args)) == -1)
+			return (-1);
+		else
+			count = err_check;
+	}
+	else
+		count += write(1, &c, 1);
+	return (count);
+}
+
+static int	ft_print_handler(char c, char d, va_list args)
 {
 	int	count;
 
@@ -88,18 +102,16 @@ int main()
 	dprintf(2,"%d",ft_printf("%d",12345));
 }
 */
-/*
 #include <stdio.h>
 int main()
 {
 	int i = 0;
 	ft_printf("ft_printf: ");
-	i = ft_printf("%d, %c, %s, %p", 17, 'a', "Hello", &i);
+	i = ft_printf("%\n");
 	ft_printf("\nNumber of chars printed: %d\n", i);
 	printf("\n");
 	int j = 0;
 	printf("---printf: ");
-	j = printf("%d, %c, %s, %p", 17, 'a', "Hello", &i);
+	j = printf("%\n");
 	printf("\nNumber of chars printed: %d\n", j);
 }
-*/
