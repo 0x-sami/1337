@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/15 09:58:15 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/17 10:14:33 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/18 16:13:08 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ int	ft_putnbr(long n, char flag)
 	count = 0;
 	if (flag == 'd' || flag == 'i')
 	{
-		if ((err_check = ft_putnbr_signed(n)) == -1)
+		err_check = ft_putnbr_signed(n);
+		if (err_check == -1)
 			return (-1);
 		count += err_check;
 	}
 	else if (flag == 'u')
 	{
-		if ((err_check = ft_putnbr_unsigned(n)) == -1)
+		err_check = ft_putnbr_unsigned(n);
+		if (err_check == -1)
 			return (-1);
 		count += err_check;
 	}
@@ -44,7 +46,8 @@ static int	ft_putnbr_signed(long n)
 	count = 0;
 	if (n < 0)
 	{
-		if ((err_check = ft_putchar('-')) == -1)
+		err_check = ft_putchar('-');
+		if (err_check == -1)
 			return (-1);
 		else
 			count++;
@@ -52,7 +55,8 @@ static int	ft_putnbr_signed(long n)
 	}
 	if (n / 10)
 		count += ft_putnbr_signed(n / 10);
-	if ((err_check = ft_putchar(n % 10 + '0')) == -1)
+	err_check = ft_putchar(n % 10 + '0');
+	if (err_check == -1)
 		return (-1);
 	else
 		count++;
@@ -67,7 +71,8 @@ static int	ft_putnbr_unsigned(unsigned int n)
 	count = 0;
 	if (n / 10)
 		count += ft_putnbr_unsigned(n / 10);
-	if ((err_check = ft_putchar(n % 10 + '0')) == -1)
+	err_check = ft_putchar(n % 10 + '0');
+	if (err_check == -1)
 		return (-1);
 	else
 		count++;

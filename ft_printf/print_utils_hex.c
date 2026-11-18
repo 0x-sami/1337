@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/15 10:00:28 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/17 12:03:26 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/18 16:11:05 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_puthex(unsigned long n, char flag)
 	{
 		if (n / 16)
 			count += ft_puthex(n / 16, flag);
-		if ((err_check = ft_putchar("0123456789abcdef"[n % 16])) == -1)
+		err_check = ft_putchar("0123456789abcdef"[n % 16]);
+		if (err_check == -1)
 			return (-1);
 		else
 			count += err_check;
@@ -33,7 +34,8 @@ int	ft_puthex(unsigned long n, char flag)
 	{
 		if (n / 16)
 			count += ft_puthex(n / 16, flag);
-		if ((err_check = ft_putchar("0123456789ABCDEF"[n % 16])) == -1)
+		err_check = ft_putchar("0123456789ABCDEF"[n % 16]);
+		if (err_check == -1)
 			return (-1);
 		else
 			count += err_check;
@@ -49,14 +51,16 @@ int	ft_putptr(void *ptr)
 
 	if (!ptr)
 	{
-		if ((err_check = write(1, "(nil)", 5)) == -1)
-				return (-1);
+		err_check = write(1, "(nil)", 5);
+		if (err_check == -1)
+			return (-1);
 		else
 			return (5);
 	}
 	count = 0;
 	address = (uintptr_t)ptr;
-	if ((err_check = write(1, "0x", 2)) == -1)
+	err_check = write(1, "0x", 2);
+	if (err_check == -1)
 		return (-1);
 	else
 		count += err_check;
@@ -74,7 +78,8 @@ static int	ft_putptr_rec(uintptr_t address)
 	count = 0;
 	if (address >= 16)
 		count += ft_putptr_rec(address / 16);
-	if ((err_check = write(1, &hex[address % 16], 1)) == -1)
+	err_check = write(1, &hex[address % 16], 1);
+	if (err_check == -1)
 		return (-1);
 	else
 		count += err_check;
