@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:56:52 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/15 11:48:05 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/18 18:11:14 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdlib.h>
 # include <stdint.h>
 
 int	ft_printf(const char *format, ...);
