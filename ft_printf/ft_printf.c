@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:46:02 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/18 17:06:21 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/18 17:22:23 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	ft_printf(const char *format, ...)
 		else
 			err_check = write(1, &format[i], 1);
 		if (err_check == -1)
+		{
+			va_end(args);
 			return (-1);
+		}
 		else
 			count += err_check;
 		i++;

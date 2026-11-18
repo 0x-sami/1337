@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/05 10:50:54 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/15 11:48:38 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/18 17:13:20 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ int	ft_putstr(char *s)
 		s = "(null)";
 	count = 0;
 	while (s[count])
-		count++;
-	if (write(1, s, count) == -1)
-		return (-1);
+	{
+		if (ft_putchar(s[count]) == -1)
+			return (-1);
+		else
+			count++;
+	}
 	return (count);
 }
