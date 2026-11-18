@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:46:02 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/18 16:53:05 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/18 17:06:21 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
+static int	errwrite(char c)
+{
+	int	count;
+	int	err_check;
+
+	count = 0;
+	err_check = write(1, &c, 1);
+	if (err_check == -1)
+		return (-1);
+	else
+		count = err_check;
+	return (count);
+}
+
 static int	ft_print_handler(char c, va_list args)
 {
 	int	count;
@@ -60,11 +74,8 @@ static int	ft_print_handler(char c, va_list args)
 	else if (c == 'p')
 		count = ft_putptr(va_arg(args, void *));
 	else if (c == '%')
-		count += errwrite('%', NULL, 1);
+		count = errwrite('%');
 	else
-	{
-		count += errwrite('%', NULL, 1);
-		count += errwrite(c, NULL, 1);
-	}
+		return (-1);
 	return (count);
 }
