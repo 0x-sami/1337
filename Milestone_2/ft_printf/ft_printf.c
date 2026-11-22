@@ -6,7 +6,7 @@
 /*   By: ysalama <ysalama@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/03 12:46:02 by ysalama           #+#    #+#             */
-/*   Updated: 2026/11/21 18:10:08 by ysalama          ###   ########.fr       */
+/*   Updated: 2026/11/22 11:02:37 by ysalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ static int	ft_check_error(const char *f, va_list args)
 	i = -1;
 	while (f[++i])
 	{
+		if (f[i] == '%' && f[i + 1] == '\0')
+			return (-1);
 		if (f[i] == '%' && bonus_helper(f[i + 2], f[i + 1], 1))
 		{
 			i += 2;
 			err_check = ft_bonusprint_handler(f[i], f[i - 1], args);
 		}
-		else if (f[i] == '%' && !bonus_helper(f[i + 2], f[i + 1], 1))
+		else if (f[i] == '%')
 			err_check = ft_print_handler(f[++i], args);
 		else
 			err_check = write(1, &f[i], 1);

@@ -8,17 +8,38 @@ _This project has been created as part of the 42 curriculum by ysalama._
 
 The implementation writes to standard output and supports the mandatory conversions:
 
+## Supported Conversions
+
 | Conversion | Description |
-| --- | --- |
+|---|---|
 | `%c` | Prints a single character. |
-| `%s` | Prints a string. A null pointer is displayed as `(null)`. |
-| `%p` | Prints a pointer in hexadecimal notation, prefixed with `0x`. A null pointer is displayed as `(nil)`. |
+| `%s` | Prints a string. Prints `(null)` if the string is NULL. |
+| `%p` | Prints a pointer address in hexadecimal format, prefixed with `0x`. |
 | `%d` | Prints a signed decimal integer. |
-| `%i` | Prints a signed decimal integer. |
+| `%i` | Prints a signed integer in base 10. |
 | `%u` | Prints an unsigned decimal integer. |
-| `%x` | Prints an unsigned hexadecimal number using lowercase letters. |
-| `%X` | Prints an unsigned hexadecimal number using uppercase letters. |
-| `%%` | Prints a percent sign. |
+| `%x` | Prints an unsigned integer in lowercase hexadecimal. |
+| `%X` | Prints an unsigned integer in uppercase hexadecimal. |
+| `%%` | Prints a literal percent sign. |
+
+## Bonus Flags
+
+The project also supports the following bonus flags:
+
+| Flag | Description |
+|---|---|
+| `%+d` | Prints a `+` sign before positive numbers and a `-` sign before negative numbers. |
+| `%+i` | Same as `%+d`, but uses the `%i` conversion. |
+| `% d` | Prints a leading space before positive numbers. Negative numbers retain their `-` sign. |
+| `% i` | Same as `% d`, but uses the `%i` conversion. |
+| `%#x` | Adds the `0x` prefix to non-zero hexadecimal numbers. |
+| `%#X` | Adds the `0X` prefix to non-zero hexadecimal numbers. |
+
+## Error Handling
+
+`ft_printf` returns the total number of characters printed on success.
+
+It returns `-1` if a write operation fails or an invalid format specifier is encountered.
 
 The project does not reproduce the buffering system of the original `printf()`.
 
