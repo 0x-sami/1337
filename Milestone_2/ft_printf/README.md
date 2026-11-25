@@ -22,19 +22,6 @@ The implementation writes to standard output and supports the mandatory conversi
 | `%X` | Prints an unsigned integer in uppercase hexadecimal. |
 | `%%` | Prints a literal percent sign. |
 
-## Bonus Flags
-
-The project also supports the following bonus flags:
-
-| Flag | Description |
-|---|---|
-| `%+d` | Prints a `+` sign before positive numbers and a `-` sign before negative numbers. |
-| `%+i` | Same as `%+d`, but uses the `%i` conversion. |
-| `% d` | Prints a leading space before positive numbers. Negative numbers retain their `-` sign. |
-| `% i` | Same as `% d`, but uses the `%i` conversion. |
-| `%#x` | Adds the `0x` prefix to non-zero hexadecimal numbers. |
-| `%#X` | Adds the `0X` prefix to non-zero hexadecimal numbers. |
-
 ## Error Handling
 
 `ft_printf` returns the total number of characters printed on success.

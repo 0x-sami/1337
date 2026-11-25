@@ -11,7 +11,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
-	
+
 %.o: %.c ft_printf.h
 	$(CC) $(FLAGS) -c $<
 
